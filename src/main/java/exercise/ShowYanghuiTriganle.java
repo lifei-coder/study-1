@@ -21,15 +21,15 @@ public class ShowYanghuiTriganle {
         }
 
         // 第二种方式
-//        for (int n = 0; n < MAX; n++)
-//            for (int k = 0; k < triangules[n].length; k++) {
-//                // 计算二项式系数，n*(n-1)*(n-2)*...*(n-k+1)/(1*2*3*...*k)
-//                int lotteryOdds = 1;
-//                for (int i = 1; i <= k; i++)
-//                    lotteryOdds = lotteryOdds * (n - i + 1)/i;
-//
-//                triangules[n][k] = lotteryOdds;
-//            }
+        for (int n = 0; n < MAX; n++)
+            for (int k = 0; k < triangules[n].length; k++) {
+                // 计算二项式系数，n*(n-1)*(n-2)*...*(n-k+1)/(1*2*3*...*k)
+                int lotteryOdds = 1;
+                for (int i = 1; i <= k; i++)
+                    lotteryOdds = lotteryOdds * (n - i + 1)/i;
+
+                triangules[n][k] = lotteryOdds;
+            }
 
         // 输出
         for (int[] row : triangules) {
