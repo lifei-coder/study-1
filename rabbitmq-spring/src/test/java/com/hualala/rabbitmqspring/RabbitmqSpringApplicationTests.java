@@ -2,13 +2,18 @@ package com.hualala.rabbitmqspring;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.FanoutExchange;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessagePostProcessor;
+import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -26,6 +31,8 @@ public class RabbitmqSpringApplicationTests {
 
     @Autowired
     private RabbitAdmin rabbitAdmin;
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @Test
     public void testAdminDeclare(){
@@ -62,6 +69,35 @@ public class RabbitmqSpringApplicationTests {
     @Test
     public void purgeQueryTest() {
         rabbitAdmin.purgeQueue("test.topic.queue", false);
+    }
+
+    @Test
+    public void sendMessage1() {
+        // 1.创建消息
+        MessageProperties messageProperties = new MessageProperties();
+        messageProperties.getHeaders().put("desc", "信息描述...");
+        messageProperties.getHeaders().put("type", "自定义消息类型...");
+        Message message = new Message("hello  你好, MessageListenerAdapter".getBytes(), messageProperties);
+        // 2.发送
+        rabbitTemplate.convertAndSend("topic001", "spring.amqp", message, new MessagePostProcessor() {
+            @Override
+            public Message postProcessMessage(Message message) throws AmqpException {
+                System.out.println("---------添加额外的设置---------");
+                message.getMessageProperties().getHeaders().put("desc", "额外修改的信息描述");
+                message.getMessageProperties().getHeaders().put("attr", "额外新家的属性");
+                return message;
+            }
+        });
+    }
+
+    @Test
+    public void sendMessage2(){
+//        MessageProperties messageProperties = new MessageProperties();
+//        messageProperties.setContentType("text/plain");
+//        Message message = new Message("mq 消息1234".getBytes(), messageProperties);
+
+        rabbitTemplate.convertAndSend("topic001", "spring.amqp", "hello object message send");
+        rabbitTemplate.convertAndSend("topic002", "rabbit.amqp", "hello object message send");
     }
 }
 
