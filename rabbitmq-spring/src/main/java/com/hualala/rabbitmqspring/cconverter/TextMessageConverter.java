@@ -5,6 +5,23 @@ import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.support.converter.MessageConversionException;
 import org.springframework.amqp.support.converter.MessageConverter;
 
+/**
+ * MessageConverter  消息转换器
+ * 我们在进行发送消息的时候, 正常情况下消息体为二进制的数据方式进行传输, 如果希望内部帮我们进行转换,或指定自定义的转换器,
+ * 就需要用到MessageConverter
+ *
+ * 自定义常用转换器：MessageConverter, 一般都需要实现这个接口
+ * 重写下面两个方法
+ * toMessage: java对象转换为Message
+ * fromMessage: Message对象转换为java对象
+ *
+ * Json转换器: Jackson2JsonMessageConverter: 可以进行java对象的转换功能
+ * DefaultJackson2JavaTypeMapper映射器: 可以进行Java对象的映射关系
+ * 自定义二进制转换器: 比如图片类型、PDF、PPT、流媒体
+ *
+ *
+ *
+ */
 public class TextMessageConverter implements MessageConverter {
     /**
      * Convert a Java Object to a Message
