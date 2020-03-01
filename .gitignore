@@ -35,3 +35,5 @@ nbdist/
 src/main/resources/static/
 src/main/resources/templates/
 
+/.metadata/
+*.hprof
