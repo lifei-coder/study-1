@@ -1,12 +1,11 @@
 package thread.java中的锁;
 
-import com.sun.corba.se.spi.orbutil.threadpool.Work;
 import org.junit.jupiter.api.Test;
 import utils.SleepUtils;
 
 import java.util.concurrent.locks.Lock;
 
-public class TwinsLockTestMain {
+public class _2TwinsLockTestMain {
 
 
     /**
@@ -14,7 +13,7 @@ public class TwinsLockTestMain {
      */
     @Test
     public void test(){
-        final Lock lock = new TwinsLock();
+        final Lock lock = new _2TwinsLock();
         class Worker extends Thread{
 
             Worker(String name) {

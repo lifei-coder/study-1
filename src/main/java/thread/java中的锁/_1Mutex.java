@@ -9,42 +9,7 @@ import java.util.concurrent.locks.Condition;
  * mutex：n. 互斥；互斥元，互斥体；互斥量
  * 本例子自定义实现一个独占锁
  */
-public class Mutex {
-
-    private final Sync sync = new Sync();
-
-    public void lock() {
-        sync.acquire(1);
-    }
-
-    public boolean tryLock() {
-        return sync.tryAcquire(1);
-    }
-
-    public void unlock(){
-        sync.release(1);
-    }
-
-    public Condition newCondition(){
-        return sync.newCondition();
-    }
-
-    public boolean  isLocked(){
-        return sync.isHeldExclusively();
-    }
-
-
-    public boolean hasQueuedThread() {
-        return sync.hasQueuedThreads();
-    }
-
-    public void lockInterruptibly() throws InterruptedException {
-        sync.acquireInterruptibly(1);
-    }
-
-    public boolean tryLock(long timeout, TimeUnit unit) throws InterruptedException {
-        return sync.tryAcquireNanos(1, unit.toNanos(timeout));
-    }
+public class _1Mutex {
 
     private static class Sync extends AbstractQueuedSynchronizer{
 
@@ -79,6 +44,42 @@ public class Mutex {
             return new ConditionObject();
         }
 
+    }
+
+
+    private final Sync sync = new Sync();
+    // lock等操作通过Sync内部类代理
+    public void lock() {
+        sync.acquire(1);
+    }
+
+    public boolean tryLock() {
+        return sync.tryAcquire(1);
+    }
+
+    public void unlock(){
+        sync.release(1);
+    }
+
+    public Condition newCondition(){
+        return sync.newCondition();
+    }
+
+    public boolean  isLocked(){
+        return sync.isHeldExclusively();
+    }
+
+
+    public boolean hasQueuedThread() {
+        return sync.hasQueuedThreads();
+    }
+
+    public void lockInterruptibly() throws InterruptedException {
+        sync.acquireInterruptibly(1);
+    }
+
+    public boolean tryLock(long timeout, TimeUnit unit) throws InterruptedException {
+        return sync.tryAcquireNanos(1, unit.toNanos(timeout));
     }
 
 }

@@ -11,7 +11,7 @@ import java.util.concurrent.locks.Lock;
  *  此时再有其他线程对同步状态进行获取，则线程只能被阻塞。
  *  在同步状态变更时，需要使用compareAndSet(int expect, int update)方法做原子性保障。
  */
-public class TwinsLock implements Lock {
+public class _2TwinsLock implements Lock {
 
     private final Sync sync = new Sync(2);
 
