@@ -1,11 +1,6 @@
-package exercise.StreamTest;
+package basic.StreamTest;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.Stack;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -83,12 +78,12 @@ public class Stream1 {
         List<String> output = Stream.of("aa", "bb", "cc").map(String::toUpperCase).collect(Collectors.toList());
         System.out.println(output); // 输出"AA", "BB", "CC"
         // 平方数
-        List<Integer> squareNum = Arrays.asList(1, 2, 3, 4).stream().map(c -> c * c).collect(Collectors.toList());
+        List<Integer> squareNum = Stream.of(1, 2, 3, 4).map(c -> c * c).collect(Collectors.toList());
         System.out.println(squareNum);
         // 从上面例子可以看出，map 生成的是个 1:1 映射，每个输入元素，
         // 都按照规则转换成为另外一个元素。还有一些场景，是一对多映射关系的，这时需要 flatMap。
         Stream<List<Integer>> inputStream = Stream.of(Arrays.asList(1), Arrays.asList(2, 3), Arrays.asList(4, 5, 6));
-        Stream<Integer> outputStream = inputStream.flatMap(childList -> childList.stream());
+        Stream<Integer> outputStream = inputStream.flatMap(Collection::stream);
         List<Integer> outputList = outputStream.collect(Collectors.toList());
         System.out.println(outputList);
         // flatMap 把 input Stream 中的层级结构扁平化，就是将最底层元素抽出来放到一起
@@ -119,7 +114,6 @@ public class Stream1 {
         * 此时 forEach 本身的实现不需要调整，而 Java8 以前的 for 循环 code 可能需要加入额外的多线程逻辑。
         *
         * 另外一点需要注意，forEach 是 terminal 操作，因此它执行后，Stream 的元素就被“消费”掉了，你无法对一个 Stream 进行两次 terminal 运算
-        *
         * 相反，具有相似功能的 intermediate 操作 peek 可以达到上述目的。如下是出现在该 api javadoc 上的一个示例。
         * peek 对每个元素执行操作并返回一个新的 Stream
         **/
@@ -169,4 +163,5 @@ public class Stream1 {
         // BinaryOperator: java.util.function.BinaryOperator是函数式接口，并且是lambda表达式。
         // BinaryOperator继承自 java.util.function.BiFunction。接收两个参数返回一个相同类型的值。例子如下
     }
+
 }

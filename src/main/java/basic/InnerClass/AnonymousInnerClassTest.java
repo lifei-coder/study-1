@@ -1,4 +1,4 @@
-package exercise.InnerClass;
+package basic.InnerClass;
 
 public class AnonymousInnerClassTest {
 

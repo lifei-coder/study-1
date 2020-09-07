@@ -1,28 +1,36 @@
-package geektime;
+package leetcode;
+
+import java.util.Arrays;
 
 public class SortAlgorithm {
 
-    static int[] array = {1,2,1,3,1,1,1,1,6,8,8,9,9};
+    static int[] array = {4, 8, 5, 1, 3, 2};
 
     public static void main(String[] args) {
-
-//        insertSort(array);
-
+        // 插入排序
+        insertSort(array);
+        // 冒泡排序
         bubbleSort(array, array.length);
     }
+
+
+
+
+
+
+
 
     /**
      * 插入排序
      * @param array
      */
-    private static void insertSort(int[] array){
+    private static void insertSort(int[] array) {
         if (array == null || array.length < 2)
             return;
 
         for (int i = 1; i < array.length; i++) {
             int j = i - 1;
             int value = array[i];
-
             for (; j >= 0; j--) {
                 if (array[j] > value) {
                     array[j+1] = array[j];
@@ -30,15 +38,17 @@ public class SortAlgorithm {
                     break;
                 }
             }
-
             array[j+1] = value;
         }
 
         printArray(array);
+        System.out.println();
     }
 
 
-    // 冒泡排序，a表示数组，n表示数组大小
+    /**
+     * 冒泡排序，a表示数组，n表示数组大小
+     * */
     private static void bubbleSort(int[] a, int n) {
         if (n <= 1) return;
 
@@ -57,13 +67,14 @@ public class SortAlgorithm {
         }
 
         printArray(a);
+        System.out.println();
     }
 
 
 
     private static void printArray(int[] array){
         for (int a : array) {
-            System.out.println(a);
+            System.out.print(a);
         }
     }
 }

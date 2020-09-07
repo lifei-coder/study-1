@@ -1,6 +1,6 @@
-package leetcode;
+package leetcode.excercise;
 
-public class ArrayTest {
+public class FindSingleNum {
 
     static int [] a1 = {11, 1, 2, 1, 2};
 
