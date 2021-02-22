@@ -7,7 +7,7 @@ public class MoveZeroToTail {
     public static void main(String[] args) {
         int[] a = {0, 0, 0, 4, 15};
         moveZero(a);
-        System.out.println(Arrays.asList(a).toString());
+        System.out.println(Arrays.toString(a));
     }
 
     public static void moveZero(int [] a) {
