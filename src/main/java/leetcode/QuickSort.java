@@ -6,38 +6,39 @@ public class QuickSort {
 
     // 快排地推公式： quick_sort = quick_sort(p, ..., q-1) + quick_sort(q+1, ..., r)
     public static void main(String[] args) {
-        int[] list = {6, 11, 3, 9, 8};
-        quickSortInternally(list, 0, list.length-1);
+        int[] list = {5,7,3,8,13,9};
+        quickSort(list, 0, list.length-1);
         System.out.println(Arrays.toString(list));
     }
 
-
-    private static void quickSortInternally(int[] a, int p, int r) {
-        if (p >= r) return;
-        int q = partition(a, p, r);
-        quickSortInternally(a, p, q-1);
-        quickSortInternally(a, q+1, r);
+    public static void quickSort(int[] array, int start, int end) {
+        if (start >= end) {
+            return;
+        }
+        int mid = partition(array, start, end);
+        quickSort(array, start, mid-1);
+        quickSort(array, mid+1, end);
     }
 
-    private static int partition(int[] a, int p, int r) {
-        int pivot = a[r]; // 通常取最后一个二元素作为pivot
-        int i = p;
-        for (int j = p; j < r; ++j) {
-            if (a[j] < pivot) {
+    public static int partition(int[] array, int start, int end) {
+        int pivot = array[end];
+        int i = start;
+        for (int j = start; j < array.length; j++) {
+            if (array[j] < pivot) {
                 if (i == j) {
-                    ++i;
+                    i++;
                 } else {
-                    int tmp = a[i];
-                    a[i++] = a[j]; /// a[i++] 这里执行完赋值，再i+1。这样写少写一行代码i++.
-                    a[j] = tmp;
+                    int tmp = array[i];
+                    array[i++] = array[j];
+                    array[j] = tmp;
                 }
             }
         }
-        // swap a[i] with  a[r]
-        int tmp = a[i];
-        a[i] = a[r];
-        a[r] = tmp;
-        System.out.println("i = " + i);
+        // 交换Array[i] 跟 Array[end]
+        int tmp = array[i];
+        array[i] = array[end];
+        array[end] = tmp;
         return i;
     }
+
 }
