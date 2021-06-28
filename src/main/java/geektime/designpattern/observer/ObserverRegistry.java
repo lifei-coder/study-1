@@ -50,7 +50,7 @@ public class ObserverRegistry {
     private Map<Class<?>, Collection<ObserverAction>> findAllObserverActions(Object observer) {
         Map<Class<?>, Collection<ObserverAction>> observerActions = new HashMap<>();
         Class<?> clazz = observer.getClass();
-        for (Method method : getAnnotateMethods(clazz)) {
+        for (Method method : getAnnotatedMethods(clazz)) {
             Class<?>[] parameterTypes = method.getParameterTypes();
             Class eventType = parameterTypes[0];
             if (!observerActions.containsKey(eventType)) {
@@ -63,7 +63,7 @@ public class ObserverRegistry {
     }
 
 
-    private List<Method> getAnnotateMethods(Class<?> clazz) {
+    private List<Method> getAnnotatedMethods(Class<?> clazz) {
         List<Method> annotatedMethods = new ArrayList<>();
         for (Method  method : clazz.getDeclaredMethods()){
             if (method.isAnnotationPresent(Subscrible.class)) {
