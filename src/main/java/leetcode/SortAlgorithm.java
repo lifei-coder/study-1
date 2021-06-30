@@ -14,12 +14,6 @@ public class SortAlgorithm {
     }
 
 
-
-
-
-
-
-
     /**
      * 插入排序
      * @param array
@@ -73,9 +67,7 @@ public class SortAlgorithm {
 
 
     private static void printArray(int[] array){
-        for (int a : array) {
-            System.out.print(a);
-        }
+        System.out.print(Arrays.toString(array));
     }
 }
 
