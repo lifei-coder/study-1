@@ -36,10 +36,9 @@ public class TreeLoop {
             nums.add(o.val);
             // 从右往左入栈。出栈顺序则是从左到右。
             for (int i = o.children.size() - 1; i >= 0; i--) {
-                stack.add(o.children.get(i));
+                nums.add(o.children.get(i).val);
             }
         }
-
         return nums;
     }
 
