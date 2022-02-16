@@ -6,33 +6,36 @@ public class QuickSort {
 
     // 快排地推公式： quick_sort = quick_sort(p, ..., q-1) + quick_sort(q+1, ..., r)
     public static void main(String[] args) {
-        int[] list = {7, 6, 5, 4, 1, 3, 2};
-        quickSort(list, 0, list.length-1);
+        int[] list = {7, 6, 5, 4, 2, 3, 1};
+        sort(list, 0, list.length-1);
         System.out.println(Arrays.toString(list));
     }
 
-    private static void quickSort(int[] list, int left, int right) {
-        if (left >= right)
+    private static void sort(int[] list, int start, int end) {
+        if (start >= end) {
             return;
-        int midIndex = partition(list, left, right);
-        quickSort(list, left, midIndex - 1);
-        quickSort(list, midIndex + 1, right);
+        }
+        int mid = partion(list, start, end);
+        sort(list, start, mid-1);
+        sort(list, mid+1, end);
     }
 
-    private static int partition(int[] list, int left, int right) {
-        int pivot = list[right];
-        int i = left;
-        for (int j = left; j < right; j++) {
+    private static int partion(int[] list, int start, int end) {
+        int i = start;
+        int pivot = list[end];
+        for (int j = start; j < end; j++) {
             if (list[j] < pivot) {
                 int temp = list[j];
                 list[j] = list[i];
-                list[i++] = temp;
+                list[i] = temp;
+                i++;
             }
         }
-        int temp = list[i];
-        list[i] = list[right];
-        list[right] = temp;
+        int temp = list[end];
+        list[end] = list[i];
+        list[i] = temp;
         return i;
     }
+
 
 }
