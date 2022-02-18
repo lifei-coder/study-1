@@ -25,17 +25,17 @@ public class MinWindowExample {
     Map<Character, Integer> windowMap = new HashMap<Character, Integer>();
 
     public String minWindow(String s, String t) {
-        int left = 0;
-        int right = 0;
         int validCount = 0;
         int length = Integer.MAX_VALUE;
-        int lLocate = -1, rLocate = -1;  //记录字串左右位置，最后用subString()函数取得子串
+        int lLocate = -1, rLocate = -1;  //记录子串左右位置，最后用subString()函数取得子串
         //将t字符串的字符以及数量记录在哈希表tString里
         for (int i = 0; i < t.length(); i++) {
             Character c = t.charAt(i);
             tStringMap.put(c, tStringMap.getOrDefault(c, 0) + 1);
         }
 
+        int left = 0;
+        int right = 0;
         //右指针是0开始
         for (right = 0; right < s.length(); right++) {
             //如果这个字符在t串中
@@ -47,10 +47,10 @@ public class MinWindowExample {
             //如果这个字串是可行的，并且左指针小于等于右指针 那么缩小窗口
             while (validCount == t.length()) {
                 // 记录长度
-                int subString = right - left + 1;
+                int subStringLength = right - left + 1;
                 //如果比length更小，就更新length
-                if (subString < length) {
-                    length = subString;
+                if (subStringLength < length) {
+                    length = subStringLength;
                     //记录字串位置
                     lLocate = left;
                     rLocate = left + length;

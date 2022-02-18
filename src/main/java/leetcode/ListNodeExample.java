@@ -5,6 +5,29 @@ package leetcode;
  * @date 2021/11/24 16:22
  */
 public class ListNodeExample {
+    private  static ListNode root = new ListNode(0);
+
+
+    static {
+        ListNode node4 = new ListNode(4);
+        ListNode node3 = new ListNode(3);
+        ListNode node2 = new ListNode(2);
+        ListNode node1 = new ListNode(1);
+        root.next = node1;
+        node1.next = node2;
+        node2.next = node3;
+        node3.next = node4;
+    }
+
+    public static void main(String[] args) {
+        ListNode rootNew = reverseListNode1(root);
+        ListNode current = rootNew;
+        while (current != null) {
+            System.out.println(current.val);
+            current = current.next;
+        }
+    }
+
 
     // 合并两个有序链表
     public static ListNode mergeTwoList(ListNode l1, ListNode l2) {
@@ -87,6 +110,27 @@ public class ListNodeExample {
             }
         }
         return p1;
+    }
+
+    // 反转链表1
+    static ListNode reverseListNode1(ListNode list) {
+        // 要点1：pre移动到最后之后，就是反转后的链表的头指针
+        ListNode pre = null;
+        ListNode cur = list;
+        while (cur != null) {
+            // 要点2：使用临时指针temp保存cur.next的值
+            ListNode temp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = temp;
+        }
+        // 要点3: 这里得返回pre，pre此时是反转后的头指针
+        return pre;
+    }
+
+    // 反转链表2
+    void reverseListNode2(ListNode list) {
+
     }
 
 
