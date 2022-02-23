@@ -12,19 +12,19 @@ public class FindLongestWords {
 
     public static String getLongString(String input) {
         int count = 0;
-        Map<Integer, Integer> hashMap = new HashMap();
+        int maxCount = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < input.length(); i++) {
             if (isChar(input.charAt(i))) {
                 count++;
-                hashMap.put(count, i);
+                maxCount = Math.max(count, maxCount);
+                map.put(count, i);
             } else {
                 count = 0;
             }
         }
-        Set<Integer> lengthSet = hashMap.keySet();
-        Integer key = lengthSet.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList()).get(0);
-        int endIndex = hashMap.get(key) + 1;
-        return input.substring(endIndex-key, endIndex);
+        int endIndex = map.get(maxCount) + 1;
+        return input.substring(endIndex-maxCount, endIndex);
     }
 
     private static boolean isChar(char c) {

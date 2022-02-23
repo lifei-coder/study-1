@@ -14,29 +14,19 @@ public class LongestNoRepeatCharSubString {
      * @param args
      */
     public static void main(String[] args) {
-        String str = "zxcaaasdq";
+        String str = "12341a1bcd";
         System.out.println(longestNoRepeatCharSubString(str));
     }
 
     private static String longestNoRepeatCharSubString(String str) {
-        int left = 0;
         int maxLength = 0;
         Map<Integer, String> map = new HashMap<>();
-        for (; left < str.length(); left++) {
+        for (int left = 0; left < str.length(); left++) {
             int right = left;
             while (right < str.length()) {
                 String subStr = str.substring(left, right+1);
-                // 判断是否重复次数
-                int repeatedCount = 0;
-                for (int n = 0; n < subStr.length(); n++) {
-                    if (subStr.charAt(n) == str.charAt(right)) {
-                        repeatedCount++;
-                    }
-                    if (repeatedCount>1)  {
-                        break;
-                    }
-                }
-                if (repeatedCount>1)  {
+                // 判断是否重复
+                if (subStr.indexOf(str.charAt(right)) != subStr.lastIndexOf(str.charAt(right))) {
                     break;
                 }
                 maxLength = Math.max(subStr.length(), maxLength);
