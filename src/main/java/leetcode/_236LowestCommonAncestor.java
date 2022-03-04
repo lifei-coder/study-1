@@ -20,7 +20,7 @@ public class _236LowestCommonAncestor {
         if (root == null) {
             return null;
         }
-        if (root == q || root == p) {
+        if (root == q | root == p) {
             return root;
         }
         // 要点: 后序遍历
@@ -44,6 +44,7 @@ public class _236LowestCommonAncestor {
         public TreeNode left;
         public TreeNode right;
         public int val;
+
     }
 
 }

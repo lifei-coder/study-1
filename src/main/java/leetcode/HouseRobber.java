@@ -19,6 +19,7 @@ public class HouseRobber {
     }
 
     private static int[] memory;
+
     private static int rob(int[] a) {
         memory = new int[a.length];
         Arrays.fill(memory,  -1); // 都用-1占位
