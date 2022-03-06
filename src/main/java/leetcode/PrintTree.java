@@ -3,6 +3,7 @@ package leetcode;
 import lombok.Data;
 
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author lifei1@songguo7.com
@@ -41,12 +42,19 @@ public class PrintTree {
 
 
     public static void main(String[] args) {
+        printByLayer(root);
+        System.out.println("-----------------------");
+//        getNLayerNode(root, 1);
+        getNLayerNode2(root, 2);
+    }
+
+    private static void printByLayer(Node root) {
         LinkedList<Node> queue = new LinkedList<>();
         queue.offer(root);
         Node current = null;
         while (!queue.isEmpty()) {
             current = queue.poll();
-            System.out.printf(current.val + " ");
+            System.out.println(current.val + " ");
             if (current.left != null) {
                 queue.offer(current.left);
             }
@@ -56,6 +64,54 @@ public class PrintTree {
         }
     }
 
+    public static void getNLayerNode(Node root, int n) {
+        LinkedList<Node> curQueue = new LinkedList<>();
+        curQueue.offer(root);
+        LinkedList<Node> nextQueue = new LinkedList<>();
+        int lvl = 1;
+        while (lvl != n) {
+            Node current = null;
+            while (!curQueue.isEmpty()) {
+                current = curQueue.poll();
+                if (current.left != null) {
+                    nextQueue.offer(current.left);
+                }
+                if (current.right != null) {
+                    nextQueue.offer(current.right);
+                }
+            }
+            curQueue = nextQueue;
+            nextQueue = new LinkedList<>();
+            lvl++;
+        }
+
+        System.out.println(curQueue);
+    }
+
+    public static void getNLayerNode2(Node root, int n) {
+        LinkedList<Node> curQueue = new LinkedList<>();
+        curQueue.offer(root);
+        while (!curQueue.isEmpty()) {
+            int level = 1;
+            while (level <= n) {
+                int size = curQueue.size();
+                for (int i = 0; i < size; i++) {
+                    Node node = curQueue.poll();
+                    if (level == n) {
+                        System.out.println(node.val);
+                    }
+                    if (node.left != null) {
+                        curQueue.offer(node.left);
+                    }
+                    if (node.right != null) {
+                        curQueue.offer(node.right);
+                    }
+                }
+                level++;
+            }
+            break;
+        }
+    }
 }
 
 @Data
@@ -64,3 +120,5 @@ class Node{
     Node left;
     Node right;
 }
+
+
