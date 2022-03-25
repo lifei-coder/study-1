@@ -22,7 +22,7 @@ public class MaxProfit1 {
     private static int maxProfit(int[] list) {
         int maxProfit = 0;
         int minPrice = list[0];
-        for (int i = 0; i < list.length; i++) {
+        for (int i = 0 ; i < list.length; i++) {
             maxProfit = Math.max(list[i] - minPrice, maxProfit);
             minPrice = Math.min(minPrice, list[i]);
         }

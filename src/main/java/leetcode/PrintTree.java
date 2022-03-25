@@ -2,6 +2,7 @@ package leetcode;
 
 import lombok.Data;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -51,7 +52,8 @@ public class PrintTree {
     private static void printByLayer(Node root) {
         LinkedList<Node> queue = new LinkedList<>();
         queue.offer(root);
-        Node current = null;
+        Node current;
+        // 按层打印二叉树
         while (!queue.isEmpty()) {
             current = queue.poll();
             System.out.println(current.val + " ");
@@ -62,6 +64,23 @@ public class PrintTree {
                 queue.offer(current.right);
             }
         }
+        System.out.println("----------------");
+        System.out.println("第2层节点： ");
+        showOfN(root, 2).forEach(c -> System.out.printf(" "+ c.val));
+    }
+
+    static LinkedList<Node> list = new LinkedList<>();
+    public static List<Node> showOfN(Node node, int n) {
+        if (n == 1) {
+            list.add(node);
+        }
+        if (node.left != null) {
+            showOfN(node.left, n - 1);
+        }
+        if (node.right != null) {
+            showOfN(node.right, n - 1);
+        }
+        return list;
     }
 
     public static void getNLayerNode(Node root, int n) {

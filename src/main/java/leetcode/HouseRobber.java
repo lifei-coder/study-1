@@ -15,7 +15,7 @@ public class HouseRobber {
         // 第一种解法
         System.out.println("第一种递归解法："+rob(a));
         // 第二种解法
-        System.out.println("第二种循环解法："+rob(a));
+        System.out.println("第二种循环解法："+robSolution2(a));
     }
 
     private static int[] memory;
@@ -43,11 +43,9 @@ public class HouseRobber {
     private static int robSolution2(int[] array){
         if (array == null || array.length == 0)
             return 0;
-        int sum_next_next = 0;
-        int sum_next = 0;
         int[] nums = new int[array.length + 2];
         for (int i = array.length - 1; i >= 0; i--) {
-            nums[i] = Math.max(nums[i+1], nums[i] + nums[i+2]);
+            nums[i] = Math.max(nums[i+1], array[i] + nums[i+2]);
         }
         return nums[0];
     }
