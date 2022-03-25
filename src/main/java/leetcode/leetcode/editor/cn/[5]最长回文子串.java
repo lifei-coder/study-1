@@ -68,8 +68,7 @@ class Solution {
         int subStringLeft = 0;
         int subStringRight = 0;
 
-        int right = 1;
-        while (right < s.length()) {
+        for (int right = 1; right < s.length(); right++) {
             int left = 0;
             while (left < right) {
                 // 判断是否为会问
@@ -84,7 +83,6 @@ class Solution {
                 }
                 left++;
             }
-            right++;
         }
 
         return s.substring(subStringLeft, subStringRight+1);
