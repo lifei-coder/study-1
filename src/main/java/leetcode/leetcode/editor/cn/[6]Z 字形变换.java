@@ -54,6 +54,9 @@ package leetcode.leetcode.editor.cn;
 // Related Topics 字符串 👍 1624 👎 0
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 class zigzagConversion{
     //2022-03-25 16:26:03
     //Z 字形变换
@@ -66,7 +69,12 @@ class zigzagConversion{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public String convert(String s, int numRows) {
-
+        List<String> rows = new ArrayList<>();
+        for (int i = 0; i < numRows; i++) {
+            rows.add("");
+        }
+        int j =
+        while ()
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
