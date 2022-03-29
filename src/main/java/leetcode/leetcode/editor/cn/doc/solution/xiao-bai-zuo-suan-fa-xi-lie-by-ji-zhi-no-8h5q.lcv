@@ -1,0 +1,53 @@
+### 解题思路
+
+1. 定义2个指针2个变量，记录当前节点与下一节点，与第三第四节点
+2. 判断下一节点是否为空，同时判断第三第四节点是否为空
+3. 如果第三节点存在，第四节点为空，那么当前节点的下一节点指向第三节点，否则指向第四节点
+4. 第二节点指向第一节点，依次循环
+
+### 代码
+
+* java
+
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if(head == null || head.next==null){
+            return head;
+        }
+        ListNode res  =head.next;
+        ListNode pre  =head.next;
+        ListNode next = head;
+        ListNode next2 = head.next.next;
+
+        while(head!=null){
+            if(pre!=null){
+                next = pre.next;
+                next2 = next==null? null: next.next;
+                if(next2 == null){
+                    head.next = next;
+                }else{
+                    head.next = next2;
+                }
+                pre.next = head;
+                head = next;
+                pre = next2;
+            }else{
+                break;
+            }
+        }
+        return res;
+    }
+}
+```
+

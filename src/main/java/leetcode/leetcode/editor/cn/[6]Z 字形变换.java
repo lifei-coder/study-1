@@ -56,6 +56,7 @@ package leetcode.leetcode.editor.cn;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 class zigzagConversion{
     //2022-03-25 16:26:03
@@ -65,16 +66,30 @@ class zigzagConversion{
     public static void main(String[] args) {
         Solution solution = new zigzagConversion().new Solution();
         // TO TEST
+        System.out.println(solution.convert("PAYPALISHIRING", 3));
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public String convert(String s, int numRows) {
+        if (numRows < 2) {
+            return s;
+        }
         List<String> rows = new ArrayList<>();
         for (int i = 0; i < numRows; i++) {
             rows.add("");
         }
-        int j =
-        while ()
+        int step = -1, index = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            String appendStr = rows.get(index) + c;
+            rows.set(index, appendStr);
+            if (index == 0 || index == rows.size() -1) {
+                step = -step;
+            }
+            index = index + step;
+        }
+        String collect = String.join("", rows);
+        return collect;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

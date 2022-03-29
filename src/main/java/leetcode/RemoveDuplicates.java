@@ -6,6 +6,7 @@ public class RemoveDuplicates {
 
     public static void main(String[] args) {
         int a[]  = {0, 0, 1, 1, 2, 2, 2, 3, 4, 4};
+        int[][] array = {{12,3,3}, {2,3,4}};
         removeDuplicates(a);
         System.out.println(Arrays.toString(a));
     }
